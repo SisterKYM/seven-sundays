@@ -1,0 +1,69 @@
+<div class="newsletter__wrapper cta__wrapper">
+  <p class="h4">{{ section.settings.title }}</p>
+  <h2 class="newsletter__headline cta__headline">{{ section.settings.content }}</h2>
+  {% comment %}
+  {%- assign formId = 'Contact_' | append: section.id -%}
+  {% form 'customer', id: formId, novalidate: 'novalidate', class: 'newsletter-form' %}
+    {%- if form.posted_successfully? -%}
+      <p class="form-message form-message--success" tabindex="-1" data-form-status>
+        {{ 'general.newsletter_form.confirmation' | t }}
+      </p>
+    {%- endif -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="input-group">
+      <input type="email"
+        name="contact[email]"
+        id="{{ formId }}-email"
+        class="form__input"
+        value="{{ form.email }}"
+        placeholder="E-Mail Adresse hier eintragen"
+        aria-label="E-Mail Adresse hier eintragen"
+        aria-required="true"
+        autocorrect="off"
+        autocapitalize="off"
+        >
+      <span class="form__submit">
+        <button type="submit" class="button" name="commit">
+          <span>Anmelden</span>
+        </button>
+      </span>
+    </div>
+    {%- if form.errors contains 'email' -%}
+      <span id="{{ formId }}-email-error" class="input-error-message">
+        <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+        {% include 'icon-error' %}
+        <span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+      </span>
+    {%- endif -%}
+  {% endform %}
+  {% endcomment %}
+  <a href="#form-subscribe" class="button button--accent">Jetzt anmelden</a>
+</div>
+
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "class": "newsletter-section cta-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Promotions, new products and sales. Directly to your inbox.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,206 @@
+<div class="section__wrapper">
+  <header class="section__header">
+    <h2 class="h2">{{ section.settings.section_title }}</h2>
+  </header>
+  <div class="section__body">
+    {%- if section.settings.text1 != blank -%}
+      <div class="h3">{{ section.settings.text1 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text2 != blank -%}
+      <div>{{ section.settings.text2 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.image != blank -%}
+      <img class="section__media lazyload" data-src="{{ section.settings.image | img_url: '800x' }}">
+    {%- endif -%}
+
+    {%- if section.settings.text3 != blank -%}
+      <div class="h3">{{ section.settings.text3 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text4 != blank -%}
+      <div>{{ section.settings.text4 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.btn_label != blank -%}
+    <a href="{{ section.settings.btn_url }}" class="button button--red">{{ section.settings.btn_label }}</a>
+    {%- endif -%}
+
+    <div class="section__icons">
+      {%- for block in section.blocks -%}
+        <div class="section__icon">
+          <img class="section__icon__image lazyload" data-src="{{ block.settings.image | img_url: '500x' }}">
+          <div class="section__icon__text">
+            <div class="h3">{{ block.settings.title }}</div>
+            <div class="section__icon__content">{{ block.settings.content }}</div>
+            {% if block.settings.btn_label != blank %}
+            <a class="button button--accent {% if forloop.last == true %}js-toggle-contact{% endif %}" {% if block.settings.btn_label contains 'Rückruftermin' %}href="javascript:void(0);" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/schlafberatung/rueckruf?background_color=f1ede5&text_color=0e1d2c&primary_color=feb85d'});return false;"{% elsif block.settings.btn_label contains 'Video' %} href="javascript:void(0);" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/schlafberatung/video-schlafberatung?background_color=f1ede5&text_color=0e1d2c&primary_color=feb85d%27%7D%29%3Breturn&month=2020-10'});return false;" {% elsif block.settings.btn_label contains 'Produkte' %} href="javascript:void(0);" onclick="fbq('track', 'Lead', {value: 'X',currency: 'EUR'});Calendly.initPopupWidget({url: 'https://calendly.com/schlafberatung/schlafberatung-bei-dir?background_color=f1ede5&text_color=0e1d2c&primary_color=feb85d'});return false;" {% else %} href="{% if forloop.last == true %}javascript:void(0);{% else %}{{ block.settings.btn_url }}{% endif %}"{% endif %}>{{ block.settings.btn_label }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="contact-form contact-form--sch">
+      {%- assign formId = 'ContactForm' -%}
+      {% form 'contact', id: formId %}
+        <div class="contact-form__inner">
+          <span class="contact-form__heading">
+            Ja, ich möchte besser schlafen und freue mich auf eine Beratung
+          </span>
+
+          {%- if form.posted_successfully? -%}
+          <p class="form-message form-message--success" tabindex="-1" data-form-status>
+            {{ 'general.newsletter_form.confirmation' | t }}
+          </p>
+          {%- endif -%}
+
+          <div class="contact-form__radio">
+            <span class="contact-form__radio__label">Geschlecht: </span>
+            <div class="contact-form__radio__inner">
+              <input type="radio" id="frau" name="contact[Geschlecht]" value="Frau" checked="checked">
+              <label for="frau">Frau</label>
+              <input type="radio" id="herr" name="contact[Geschlecht]" value="Herr">
+              <label for="herr">Herr</label>
+              <input type="radio" id="drivers" name="contact[Geschlecht]" value="Divers">
+              <label for="drivers">Divers</label>
+            </div>
+          </div>
+        </div>
+        <input type="text" name="contact[Vorname]" value="" class="form__input" placeholder="Vorname*" required>
+        <input type="text" name="contact[Nachname]" value="" class="form__input" placeholder="Nachname*" required>
+        <input type="email" name="contact[email]" value="" class="form__input" placeholder="Deine E-Mail-Adresse eingeben*" required>
+        <input type="tel" name="contact[Telefonummer]" value="" class="form__input" placeholder="Telefonummer*" required>
+        <input type="text" name="contact[Ort]" value="" class="form__input" placeholder="Ort*" required>
+        <select name="contact[Land]" class="form__input" placeholder="Land*" required>
+          <option value="Land">Land</option>
+          <option value="Deutschland">Deutschland</option>
+          <option value="Österreich">Österreich</option>
+          <option value="Schweiz">Schweiz</option>
+          <option value="Niederlande">Niederlande</option>
+          <option value="Vereinigtes Königreich">Vereinigtes Königreich</option>
+          <option value="Schweden">Schweden</option>
+        </select>
+        <textarea type="text" name="contact[Nachricht]" class="form__input form__textarea" placeholder="Nachricht*" required></textarea>
+        <div class="contact-form__checkbox">
+          <input type="checkbox" class="form__checkbox">
+          <label>Ich habe die <a href="/pages/datenschutz/">Datenschutzerklärung</a> gelesen und stimme dieser zu.</label>
+        </div>
+        <button type="submit" class="button button--accent button--disabled">Absenden</button>
+      {% endform %}
+    </div>
+
+    {%- comment -%}
+    <div class="google-map">
+      <div class="google-map__title h3">Anschrift:</div>
+      <div class="google-map__iframe">
+        {{ section.settings.google_map }}
+      </div>
+      <div class="google-map__text">
+        {{ section.settings.contact_text }}
+      </div>
+
+    </div>
+    {%- endcomment -%}
+  </div>
+</div>
+
+<!-- Calendly Link-Widget start -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+<!-- Calendly Link-Widget end -->
+
+{% schema %}
+{
+  "name": "Rich text",
+  "class": "index-section rich-text-section section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "richtext",
+      "id": "text1",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text2",
+      "label": "Text 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "text3",
+      "label": "Text 3"
+    },
+    {
+      "type": "richtext",
+      "id": "text4",
+      "label": "Text 4"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label"
+    },
+    {
+      "type": "text",
+      "id": "google_map",
+      "label": "Google map"
+    },
+    {
+      "type": "richtext",
+      "id": "contact_text",
+      "label": "Contact text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button Url"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

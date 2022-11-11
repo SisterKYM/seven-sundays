@@ -1,0 +1,103 @@
+<div class="page-container">
+  <div class="featured-products">
+    {%- for block in section.blocks -%}
+      <div class="featured-product">
+        {%- if block.settings.title -%}
+          <h3 class="h3">{{ block.settings.title }}</h3>
+        {%- endif -%}
+        {%- if block.settings.image -%}
+          <img class="lazyload" data-src="{{ block.settings.image | img_url: '300x' }}">
+        {%- endif -%}
+        {%- if block.settings.content -%}
+          <div class="h8">{{ block.settings.content }}</div>
+        {%- endif -%}
+        {%- if block.settings.btn_label -%}
+          <a href="{{ block.settings.btn_link }}" class="button button--{{ block.settings.btn_style }}">{{ block.settings.btn_label }}</a>
+        {%- endif -%}
+      </div>
+    {%- endfor- %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "class": "index-section index-section--featured-products featured-products-section",
+  "settings": [
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "btn_style",
+          "label": "Button style",
+          "default": "primary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "accent",
+              "label": "Secondary"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products",
+      "category": {
+        "da": "Produkt",
+        "de": "Produkte",
+        "en": "Product",
+        "es": "Producto",
+        "fi": "Tuote",
+        "fr": "Produit",
+        "hi": "उत्पाद",
+        "it": "Prodotto",
+        "ja": "商品",
+        "ko": "제품",
+        "nb": "Produkt",
+        "nl": "Product",
+        "pt-BR": "Produto",
+        "pt-PT": "Produto",
+        "sv": "Produkt",
+        "th": "สินค้า",
+        "zh-CN": "产品",
+        "zh-TW": "產品"
+      }
+    }
+  ]
+}
+{% endschema %}

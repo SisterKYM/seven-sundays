@@ -1,0 +1,84 @@
+<div class="section__wrapper">
+  <header class="section__header">
+    <h2 class="h2">{{ section.settings.title }}</h2>
+  </header>
+  <div class="section__body">
+    {%- if section.settings.text1 != blank -%}
+      <div class="h3">{{ section.settings.text1 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text2 != blank -%}
+      <div>{{ section.settings.text2 }}</div>
+    {%- endif -%}
+
+    <div class="slider-content-one">
+      {%- for block in section.blocks -%}
+        <div class="employeeCard">
+          <div class="employeeCard__copy">
+            <div class="h3">{{ block.settings.title }}</div>
+            <p class="text-small">{{ block.settings.subtitle }}</p>
+            <p>{{ block.settings.content }}</p>
+          </div>
+          <div class="employeeCard__media">
+            <img class="lazyload" data-src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}" title="{{ block.settings.title }}" />
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Rich text with slider",
+  "class": "index-section rich-text-section section section--divider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "richtext",
+      "id": "text1",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text2",
+      "label": "Text 2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

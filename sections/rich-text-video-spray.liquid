@@ -1,0 +1,102 @@
+<div class="section__wrapper">
+  <header class="section__header">
+    <h2 class="h2">{{ section.settings.section_title }}</h2>
+  </header>
+  <div class="section__body">
+    <p class="h3">{{ section.settings.text1 }}</p>
+    {% if section.settings.video != blank %}
+    <div class="video">
+      <div class="video__play">
+        <div class="video__button js-video-trigger" data-video="{{ section.settings.video }}">
+          {%- include 'icon-play' -%}
+        </div>
+      </div>
+      <img class="lazyload img--desktop" data-src="{{ section.settings.image_desktop | img_url: 'master' }}">
+      <img class="lazyload img--mobile" data-src="{{ section.settings.image_mobile | img_url: 'master' }}">
+    </div>
+    {% endif %}
+    <p class="">{{ section.settings.text2 }}</p>
+    {%- if section.settings.image != blank -%}
+      <img class="section__media lazyload" data-src="{{ section.settings.image | img_url: '800x' }}">
+    {%- endif -%}
+  </div>
+  <div class="section__blocks">
+    {%- for block in section.blocks -%}
+      <div class="section__block">
+        <img class="section__block__image lazyload" data-src="{{ block.settings.image | img_url: '500x' }}">
+        <div class="section__block__text">
+          <div class="h3">{{ block.settings.title }}</div>
+          <div class="section__block__content">{{ block.settings.content }}</div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Rich text with video",
+  "class": "rich-text-video-section section section--divider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "textarea",
+      "id": "text1",
+      "label": "Text 1"
+    },
+    {
+      "type": "textarea",
+      "id": "text2",
+      "label": "Text 2"
+    },
+    {
+	  "type": "image_picker",
+	  "id": "image_desktop",
+	  "label": "Video Image - Desktop"
+	},
+	{
+	  "type": "image_picker",
+	  "id": "image_mobile",
+	  "label": "Video Image - Mobile"
+	},
+	{
+	  "type": "text",
+	  "id": "video",
+	  "label": "Video URL"
+	},
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

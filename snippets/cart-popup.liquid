@@ -1,0 +1,236 @@
+
+
+    <div class="cart-popup">
+
+      <div class="cart-popup__overlay js-cart-popup__overlay"></div>
+
+      <div class="cart-popup__wrapper">
+
+        <div class="cart-popup__inner">
+
+          <div class="cart-popup__header">
+            <span class="cart-popup__title h3">Dein Warenkorb <span class="cart-popup__item_count">({{ cart.item_count }})</span></span>
+            <span class="cart-popup__close js-cart-popup__close">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="33px" height="33px" viewBox="0 0 33 33" version="1.1">
+                <title>close-icon</title>
+                <g id="close-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="noun_cancel_2527865" fill="#0E1D2C" fill-rule="nonzero">
+                        <path d="M19.0270895,16.9401059 L32.2949529,3.67323754 C32.9189841,3.04925314 32.9189841,2.0348785 32.2949529,1.4108941 C31.6709217,0.786909702 30.656471,0.786909702 30.0324398,1.4108941 L16.7645764,14.6777624 L3.496713,1.40769418 C2.8726818,0.783709782 1.85823107,0.783709782 1.23419987,1.40769418 C0.61016867,2.03167858 0.61016867,3.04605322 1.23419987,3.67003762 L14.5020633,16.9401059 L1.23419987,30.2069742 C0.61016867,30.8309586 0.61016867,31.8453332 1.23419987,32.4693176 C1.54461539,32.7829098 1.95423587,32.9397059 2.36385635,32.9397059 C2.77347684,32.9397059 3.18309732,32.7829098 3.496713,32.4725176 L16.7645764,19.2024493 L30.0324398,32.4693176 C30.3460555,32.7829098 30.7556759,32.9397059 31.1652964,32.9397059 C31.5749169,32.9397059 31.9845374,32.7829098 32.2981531,32.4725176 C32.9221843,31.8485332 32.9221843,30.8341585 32.2981531,30.2101741 L19.0270895,16.9401059 Z" id="Path"></path>
+                    </g>
+                </g>
+              </svg>
+            </span>
+          </div>
+
+          <div class="cart-popup__content">
+
+            <div class="cart-popup__empty {% if cart.item_count > 0 %} hide{% endif %}" title="">
+              <svg width="56" viewBox="0 0 65 74" xmlns="http://www.w3.org/2000/svg">
+                <g fill-rule="nonzero" fill="none">
+                  <path d="M64.407 9.856L53.605 0H11.371L.569 9.856A1.548 1.548 0 00.1 11.603c.235.619.843 1.031 1.524 1.031h61.727a1.62 1.62 0 001.522-1.031 1.545 1.545 0 00-.467-1.747z" fill="#C4C4C4"></path><path d="M63.351 9.927H1.624C.728 9.927 0 10.644 0 11.529v59.267C0 72.566 1.454 74 3.249 74h58.478c1.795 0 3.249-1.434 3.249-3.204V11.53c0-.885-.728-1.602-1.625-1.602z" fill="#E4E4E4"></path><path d="M32.488 45.122c-7.963 0-14.44-6.447-14.44-14.37v-4.79a1.6 1.6 0 011.605-1.596 1.6 1.6 0 011.604 1.596v4.79c0 6.163 5.04 11.177 11.23 11.177 6.192 0 11.231-5.014 11.231-11.177v-4.79a1.6 1.6 0 011.604-1.596 1.6 1.6 0 011.605 1.596v4.79c0 7.923-6.477 14.37-14.44 14.37z" fill="#6D6D6D"></path>
+                </g>
+              </svg>
+              <p>Dein Warenkorb ist noch leer.</p>
+            </div>
+
+            <div class="cart-popup__box{% if cart.item_count == 0 %} hide{% endif %}">
+              <form action="/cart" method="post" novalidate id="updateform">
+
+                <div class="cart-popup__subtotal">
+                  <div class="cart-popup__subtotal__inner">
+                    <div class="cart-popup__subtotal__label">
+                      <span>Insgesamt</span>
+                    </div>
+                    <div class="cart-popup__subtotal__price">
+                      <span>{{ cart.total_price | money }}</span>
+                    </div>
+                    <div class="cart-popup__subtotal__info">* zzgl. Versandkosten</div>
+                    <button type="button" class="button button--accent cart-popup__checkout js-cart-popup__checkout">Zur Kasse</span>
+                  </div>
+                </div>
+
+                <div class="cart-popup__items">
+                  <div class="cart-popup__items__inner">
+                    <div>
+                      {%- for item in cart.items -%}
+                      <div class="cart-popup__item">
+                        <div class="cart-popup__item__row1">
+                          <div class="cart-popup__item__img">
+                            <a href="{{ item.url }}" class="cart-popup__link">
+                              <img src="{{ item | img_url: 'medium' }}" alt="{{ item.alt | escape }}">
+                            </a>
+                          </div>
+                          <div class="cart-popup__item__title">
+                            <a href="{{ item.url }}" class="cart-popup__link">{{ item.product.title }}</a>
+                          </div>
+                          <div class="cart-popup__item__remove">
+                            <a href="/cart/change?id={{ item.key }}&amp;quantity=0" class="svg-icon-delete js-deleteitem-ajax" title="Delete">
+                              <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 22 22" style="enable-background:new 0 0 22 22;" xml:space="preserve">
+                                <g>
+                                  <path d="M3.6,21.1c-0.1-0.1-0.2-0.3-0.2-0.4v-15H2.2C2,5.7,1.9,5.6,1.7,5.5C1.6,5.4,1.6,5.2,1.6,5.1c0-0.2,0.1-0.3,0.2-0.4
+                                          C1.9,4.5,2,4.4,2.2,4.4h5V1.9c0-0.2,0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2h6.3c0.2,0,0.3,0.1,0.4,0.2c0.1,0.1,0.2,0.3,0.2,0.4
+                                          v2.5h5c0.2,0,0.3,0.1,0.4,0.2c0.1,0.1,0.2,0.3,0.2,0.4c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2h-1.3v15
+                                          c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2H4.1C3.9,21.3,3.7,21.2,3.6,21.1z M17.2,5.7H4.7v14.4h12.5V5.7z M8.3,9
+                                          c0.1,0.1,0.2,0.3,0.2,0.4v6.9c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2s-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4V9.4
+                                          c0-0.2,0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2S8.1,8.9,8.3,9z M8.4,4.4h5V2.6h-5V4.4z M11.4,9c0.1,0.1,0.2,0.3,0.2,0.4v6.9
+                                          c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2s-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4V9.4c0-0.2,0.1-0.3,0.2-0.4
+                                          c0.1-0.1,0.3-0.2,0.4-0.2S11.3,8.9,11.4,9z M13.6,9c0.1-0.1,0.3-0.2,0.4-0.2s0.3,0.1,0.4,0.2c0.1,0.1,0.2,0.3,0.2,0.4v6.9
+                                          c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2s-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4V9.4C13.4,9.3,13.5,9.1,13.6,9z"></path>
+                                </g>
+                              </svg>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="cart-popup__item__row2">
+                          <div class="cart-popup__item__variants">
+                            {%- unless item.variant.title contains 'Default' -%}
+                              {%- for option in item.product.options -%}
+                                {%- assign var_title = option | downcase  -%}
+                                {%- assign option_value = item.variant.options[forloop.index0] -%}
+                                {%- if var_title == 'size' -%}
+                                  {%- assign option_title = 'Größe' -%}
+                                {%- elsif var_title == 'left, right'  -%}
+                                  {%- assign option_title = 'Schicht 1' -%}
+                                  {%- if option_value contains '_' -%}
+                                    {%- assign option_value = option_value | append: ' (rechts)' -%}
+                                  {%- endif -%}
+                                  {%- assign option_value = option_value | replace: 'Memory', 'Memory-Schicht' | replace: 'Latex', 'Latex-Schicht' | replace: 'Softness', 'Softness-Schicht' | replace: '_', ' (links)<br>' -%}
+                                {%- elsif var_title == 'uni' -%}
+                                  {%- assign option_title = 'Schicht 1' -%}
+                                  {%- assign option_value = option_value | replace: 'Memory', 'Memory-Schicht' | replace: 'Latex', 'Latex-Schicht' | replace: 'Softness', 'Softness-Schicht' -%}
+                                {%- else -%}
+                                  {%- assign option_title = option -%}
+                                {%- endif -%}
+                                {%- if option_value != '-' -%}
+                                <div class="cart-popup__item__variant">
+                                  <div class="cart-popup__item__option">{{ option_title }}:</div>
+                                  <div class="cart-popup__item__value">{{ option_value }}</div>
+                                </div>
+                                {%- endif -%}
+                                {%- if option_title == 'Schicht 1' and option_value != '-' -%}
+                                  {%- if item.product.handle == 'pure-matratze' -%}
+                                    <div class="cart-popup__item__variant">
+                                      <div class="cart-popup__item__option">Schicht 2:</div>
+                                      <div class="cart-popup__item__value">Bassisschicht, zoniert</div>
+                                    </div>
+                                    <div class="cart-popup__item__variant">
+                                      <div class="cart-popup__item__option">Schicht 3:</div>
+                                      <div class="cart-popup__item__value">Bassisschicht, nicht zoniert</div>
+                                    </div>
+                                  {%- elsif item.product.handle == 'pure-plus-matratze' -%}
+                                    <div class="cart-popup__item__variant">
+                                      <div class="cart-popup__item__option">Schicht 2:</div>
+                                      <div class="cart-popup__item__value">5-Zonen-Schicht</div>
+                                    </div>
+                                    <div class="cart-popup__item__variant">
+                                      <div class="cart-popup__item__option">Schicht 3:</div>
+                                      <div class="cart-popup__item__value">Bassisschicht, nicht zoniert</div>
+                                    </div>
+                                  {%- elsif item.product.handle == 'classic-matratze' -%}
+                                    <div class="cart-popup__item__variant">
+                                      <div class="cart-popup__item__option">Schicht 2:</div>
+                                      <div class="cart-popup__item__value">5-Zonen-Schicht</div>
+                                    </div>
+                                    <div class="cart-popup__item__variant">
+                                      <div class="cart-popup__item__option">Schicht 3:</div>
+                                      <div class="cart-popup__item__value">Stretch-Schicht</div>
+                                    </div>
+                                  {%- elsif item.product.handle == 'boxspringmatratze' -%}
+                                    <div class="cart-popup__item__variant">
+                                      <div class="cart-popup__item__option">Schicht 2:</div>
+                                      <div class="cart-popup__item__value">5-Zonen-Schicht</div>
+                                    </div>
+                                    <div class="cart-popup__item__variant">
+                                      <div class="cart-popup__item__option">Schicht 3:</div>
+                                      <div class="cart-popup__item__value">Stretch-Schicht</div>
+                                    </div>
+                                  {%- else -%}
+                                  {%- endif -%}
+                                {%- endif -%}
+                              {%- endfor -%}
+                            {%- endunless -%}
+                          </div>               
+                          {%- assign discount = 0 -%}
+                          {%- for tag in item.product.tags -%}
+                            {%- if tag contains 'bundle_' -%}
+                              {%- assign discount = tag | replace: 'bundle_', '' | plus: 0 -%}
+                            {%- endif -%}
+                          {%- endfor -%}
+                          {%- if discount > 0 -%}
+                            <div class="cart-item__bundle">                          
+                              <div class="cart-item__bundle__label">Pärchen-Deal:</div>
+                              <div class="cart-item__bundle__input">
+                                <input type="checkbox" id="cart-item__bundle__check--{{ item.product_id }}" class="cart-item__bundle__check js-cart-item__bundle__check" {% if item.quantity > 1 %}checked{% endif %}>
+                                <label for="cart-item__bundle__check--{{ item.product_id }}">2 bestellen und {{ discount }} % extra sparen</label>
+                              </div>
+                            </div>
+                          {%- endif -%}
+                        </div>
+                        <div class="cart-popup__item__row3">
+                          <div class="cart-popup__item__qty">
+                            <select>
+                              {% for i in (1..20) %}
+                                <option value="{{ i }}" {% if item.quantity == i %}selected{% endif %}>{{ i }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          <div class="cart-popup__item__price">
+                            <span>{{item.line_price | money}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="cart-upsell">
+              <div class="cart-upsell__heading h4">Heute gerne gekauft:</div>
+              <div class="cart-upsell__inner">
+                {% assign p_list = 'reisekissen' | append: ',' | append: 'daunenkissen' | append: ',' | append: 'seitenschlaeferkissen' | split: ',' %}
+                {% for p_iterator in p_list %}
+                  {% if p_iterator %}
+                    {% assign p_item = all_products[p_iterator] %}
+                    <div class="cart-upsell__item">
+                      <div class="cart-upsell__item__inner">
+                        <div class="cart-upsell__text">
+                          <div class="cart-upsell__title">
+                            <a href="{{ p_item.url }}">{{ p_item.title }}</a>
+                            <a href="{{ p_item.url }}" class="cart-upsell__link">Mehr Info</a>
+                          </div>
+                          <div class="cart-upsell__price">
+                            <span class="cart-upsell__price__normal">{{ p_item.price | money }}</span>
+                            <span class="cart-upsell__price__compare">{{ p_item.compare_at_price | money }}</span>
+                          </div>
+                          <div class="cart-upsell__add__wrapper">
+                            <a href="javascript:void(0);" class="cart-upsell__add js-cart-upsell__add" data-id="{{ p_item.first_available_variant.id }}">
+                              <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="33px" height="33px" viewBox="0 0 33 33" version="1.1">
+                                  <title>close-icon</title>
+                                  <g id="close-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                      <g id="noun_cancel_2527865" fill="#ffffff" fill-rule="nonzero">
+                                          <path d="M19.0270895,16.9401059 L32.2949529,3.67323754 C32.9189841,3.04925314 32.9189841,2.0348785 32.2949529,1.4108941 C31.6709217,0.786909702 30.656471,0.786909702 30.0324398,1.4108941 L16.7645764,14.6777624 L3.496713,1.40769418 C2.8726818,0.783709782 1.85823107,0.783709782 1.23419987,1.40769418 C0.61016867,2.03167858 0.61016867,3.04605322 1.23419987,3.67003762 L14.5020633,16.9401059 L1.23419987,30.2069742 C0.61016867,30.8309586 0.61016867,31.8453332 1.23419987,32.4693176 C1.54461539,32.7829098 1.95423587,32.9397059 2.36385635,32.9397059 C2.77347684,32.9397059 3.18309732,32.7829098 3.496713,32.4725176 L16.7645764,19.2024493 L30.0324398,32.4693176 C30.3460555,32.7829098 30.7556759,32.9397059 31.1652964,32.9397059 C31.5749169,32.9397059 31.9845374,32.7829098 32.2981531,32.4725176 C32.9221843,31.8485332 32.9221843,30.8341585 32.2981531,30.2101741 L19.0270895,16.9401059 Z" id="Path"></path>
+                                      </g>
+                                  </g>
+                                </svg>
+                              </span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% comment %}
+        {%- include "menu-cart-item-empty" -%}
+        {% endcomment %}
+
+      </div>
+    </div>

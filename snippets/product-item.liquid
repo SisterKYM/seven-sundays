@@ -1,0 +1,26 @@
+<div class="product-item">
+  <div class="product-item__title">
+    <span class="h4">{{ mod_product.title }}</span>
+    <span class="chevron">{%- render 'icon-chevron' -%}</span>
+  </div>
+  <div class="product-item__content">
+    <a class="product-item__overlay" href="{% if mod_product.tags contains 'demnächst' %}#{% else %}{{ mod_product.url }}{% endif %}"></a>
+    <span class="product-item__meta h8">{{ mod_product.metafields.global.subtitle }}</span>
+    <img class="product-item__image lazyload" data-src="{{ mod_product.featured_image | img_url: '500x' }}">
+    <span class="product-item__price">{{ mod_product.price | money }}</span>
+    {% comment %}<span class="product-item__ab">Ab % finanzieren</span>{% endcomment %}
+    {% if mod_product.tags contains 'demnächst' %}
+    <a class="product-item__link product-item__coming" href="#">DEMNÄCHST</a>
+    {% else %}
+    <a class="product-item__link button button--accent" href="{{ mod_product.url }}">Zum Produkt</a>
+    {% endif %}
+    <div class="product-item__hover">
+      <div class="product-item__desc">{{ mod_product.metafields.global.content }}</div>
+      {% if mod_product.tags contains 'demnächst' %}
+      <a class="product-item__link product-item__coming" href="#">DEMNÄCHST</a>
+      {% else %}
+      <a class="product-item__link button button--accent" href="{{ mod_product.url }}">Zum Produkt</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+
+    <style>
+      @font-face {
+        font-family: 'Cooper BT';
+        font-style: normal;
+        src: local("Cooper BT Std Light"), local("Cooper-BT-Std-Light"), url("{{ '313faf7f-c695-4da8-aa44-5e7881466d2c.eot' | asset_url }}");
+        src: local("Cooper BT Std Light"), local("Cooper-BT-Std-Light"), url("{{ '313faf7f-c695-4da8-aa44-5e7881466d2c.eot' | asset_url }}") format("eot"), url("{{ 'd02e214c-1036-412c-a19c-71c32739a0da.woff2' | asset_url }}") format("woff2"), url("{{ '05fbaea7-e813-47a1-a9cb-8bbad7e9ebb7.woff' | asset_url }}") format("woff"), url("{{ '22d3477e-bb6a-495e-932b-6614c48fabb3.ttf' | asset_url }}") format("truetype");
+        font-display: swap;
+      }
+      .logo__image.logo__image--small {
+        max-height: 2em;
+      }
+      span.product-thumbnail__quantity {
+        border: 1px solid red;
+        background-color: white;
+        color: #197bbd;
+      }
+      .section__title {
+        font-family: 'Cooper BT';
+        font-style: normal;
+        font-stretch: normal;
+        font-weight: normal;
+        font-size: 22px;
+        line-height: 33px;
+      }
+      .payment-due__price {
+        font-style: normal;
+        font-stretch: normal;
+        font-weight: normal;
+        font-size: 22px;
+        line-height: 33px;
+      }
+      @media only screen and (min-width: 992px) {
+        .section__title {
+          font-size: 24px;
+          line-height: 36px;
+        }
+        .payment-due__price {
+          font-size: 24px;
+          line-height: 36px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    {{ skip_to_content_link }}
+
+    <header class="banner" data-header role="banner">
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </header>
+
+    {{ order_summary_toggle }}
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main">
+          <header class="main__header" role="banner">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </header>
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+          </main>
+          <footer class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+          </footer>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+  </body>
+</html>

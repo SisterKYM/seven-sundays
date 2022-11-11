@@ -1,0 +1,98 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Seven Sundays",
+    "theme_author": "Yoshino",
+    "theme_version": "1.1.0",
+    "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/using-themes\/themes-by-shopify\/",
+    "theme_support_url": "https:\/\/support.shopify.com\/"
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Main menu"
+      },
+      {
+        "type": "link_list",
+        "id": "mobile_menu",
+        "label": "Mobile menu"
+      },
+      {
+        "type": "link_list",
+        "id": "sticky_menu",
+        "label": "Sticky menu"
+      }
+    ]
+  },
+  {
+    "name": {
+      "da": "Favoritikon",
+      "de": "Favicon",
+      "en": "Favicon",
+      "es": "Favicon",
+      "fi": "Favicon",
+      "fr": "Favicon",
+      "hi": "Favicon",
+      "it": "Favicon",
+      "ja": "ファビコン",
+      "ko": "Favicon",
+      "nb": "Favicon",
+      "nl": "Favicon",
+      "pt-BR": "Favicon",
+      "pt-PT": "Favicon",
+      "sv": "Favicon",
+      "th": "Favicon",
+      "zh-CN": "网站图标",
+      "zh-TW": "Favicon"
+    },
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": {
+          "da": "Billede for favoritikon",
+          "de": "Favicon-Foto",
+          "en": "Favicon image",
+          "es": "Imagen de favicon",
+          "fi": "Favicon-kuva",
+          "fr": "Image favicon",
+          "hi": "favicon इमेज",
+          "it": "Immagine favicon",
+          "ja": "ファビコン画像",
+          "ko": "파비콘 이미지",
+          "nb": "Favicon-bilde",
+          "nl": "Favicon-afbeelding",
+          "pt-BR": "Imagem favicon",
+          "pt-PT": "Imagem Favicon",
+          "sv": "Favicon-bild",
+          "th": "รูปภาพ Favicon",
+          "zh-CN": "网站图标图片",
+          "zh-TW": "Favicon 圖片"
+        },
+        "info": {
+          "da": "Skaleres ned til 32 x 32 px",
+          "de": "Wird in der Größe 32 x 32 px angezeigt",
+          "en": "Will be scaled down to 32 x 32px",
+          "es": "Se reducirá a 32 x 32px",
+          "fi": "Skaalataan 32 x 32 pikseliin",
+          "fr": "L'image sera réduite à 32 x 32 px",
+          "hi": "32 x 32 पिक्सेल के आकार का कर दिया जाएगा",
+          "it": "Verrà ridimensionata a 32 x 32 pixel.",
+          "ja": "32×32ピクセルに縮小されます。",
+          "ko": "32x32 픽셀로 축소됩니다.",
+          "nb": "Vil skaleres ned til 32 x 32 px",
+          "nl": "Wordt verkleind tot 32x32 pixels",
+          "pt-BR": "será reduzida para 32 x 32 pixels",
+          "pt-PT": "Será reduzida para 32 x 32 px",
+          "sv": "Kommer skalas ned till 32 x 32 px",
+          "th": "จะถูกลดขนาดลงเป็น 32 x 32 พิกเซล",
+          "zh-CN": "将缩小到 32 x 32px",
+          "zh-TW": "將會縮小為 32 x 32 像素"
+        }
+      }
+    ]
+  }
+]

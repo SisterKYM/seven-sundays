@@ -1,0 +1,55 @@
+<div class="section__wrapper">
+  <header class="section__header">
+    <h2 class="h2"><img class="lazyload" data-src="{{ 'icon-swiss-flag.svg' | asset_url }}"><span>{{ section.settings.title }}</span></h2>
+  </header>
+  <div class="blockList">
+    {%- for block in section.blocks -%}
+      <div class="blockList__item">
+        <div class="blockList__title">
+          <img class="lazyload" data-src="{{ block.settings.image | file_url }}" alt="{{ block.settings.title }}" title="{{ block.settings.title }}">
+          <span class="h5">{{ block.settings.title }}</span>
+        </div>
+        <div class="blockList__content"><span class="text-small">{{ block.settings.content }}</span></div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Icon blocks",
+  "class": "product-blocks-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,98 @@
+<div class="section__wrapper {% if section.settings.anchor != blank %} section-check{% endif %}" name="{% if section.settings.anchor != blank %}{{ section.settings.anchor }}{% endif %}" id="{% if section.settings.anchor != blank %}{{ section.settings.anchor_id }}{% endif %}">
+  <header class="section__header">
+    <h2 class="h2">{{ section.settings.section_title }}</h2>
+  </header>
+  <div class="section__body">
+    {%- if section.settings.text1 != blank -%}
+      <div class="h3">{{ section.settings.text1 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text2 != blank -%}
+      <div>{{ section.settings.text2 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.image != blank -%}
+      <img class="section__media lazyload" data-src="{{ section.settings.image | img_url: '800x' }}">
+    {%- endif -%}
+
+    {%- if section.settings.text3 != blank -%}
+      <div class="h3">{{ section.settings.text3 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text4 != blank -%}
+      <div>{{ section.settings.text4 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.btn_label != blank -%}
+    <a href="{{ section.settings.btn_url }}" class="button button--accent">{{ section.settings.btn_label }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Rich text",
+  "class": "index-section rich-text-section section section--divider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "richtext",
+      "id": "text1",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text2",
+      "label": "Text 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "text3",
+      "label": "Text 3"
+    },
+    {
+      "type": "richtext",
+      "id": "text4",
+      "label": "Text 4"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text with divider",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

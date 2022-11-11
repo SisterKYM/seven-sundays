@@ -1,0 +1,252 @@
+{%- assign mod_product_links = linklists['footer-products'].links | default: false -%}
+{%- assign mod_product_title = linklists['footer-products'].title | default: false -%}
+{%- assign mod_about_links = linklists['footer-about'].links | default: false -%}
+{%- assign mod_about_title = linklists['footer-about'].title | default: false -%}
+{%- assign mod_support_links = linklists['footer-support'].links | default: false -%}
+{%- assign mod_support_title = linklists['footer-support'].title | default: false -%}
+
+<footer class="footer">
+  <div class="footer__section--top">
+    <div class="footer__wrapper">
+      <div class="footer__section" id="form-subscribe">
+        <div class="footer__item">
+          <h3 class="h3">Schlafletter abonnieren</h3>
+          <p>Melde Dich jetzt für unseren Newsletter an. Darin informieren wir Dich über unsere Produkte, Neuheiten, Angebote und wertvolle Schlaftipps. Abmelden kannst Du Dich immer.</p>
+        </div>
+        <div class="footer__item">
+          <!-- Begin Mailchimp Signup Form -->
+          <div id="mc_embed_signup">
+            <form action="https://shop.us4.list-manage.com/subscribe/post?u=3f11294127ab68914f83b8679&amp;id=cd1293c6ad" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <div id="mc_embed_signup_scroll">
+                <div class="mc-field-group">
+                  <input type="email" value="" name="EMAIL" class="required email form__input form__input--email" id="mce-EMAIL" placeholder="E-Mail Adresse eingeben">
+                </div>
+                <div class="mc-field-group input-group">
+                  <div class="contact-form__radio">
+                    <span class="contact-form__radio__label">Geschlecht: </span>
+                    <div class="contact-form__radio__inner">
+                      <input type="radio" value="Frau" name="GESCHLECHT" id="mce-GESCHLECHT-0">
+                      <label for="mce-GESCHLECHT-0">Frau</label>
+                      <input type="radio" value="Herr" name="GESCHLECHT" id="mce-GESCHLECHT-1">
+                      <label for="mce-GESCHLECHT-1">Herr</label>
+                      <input type="radio" value="Divers" name="GESCHLECHT" id="mce-GESCHLECHT-2">
+                      <label for="mce-GESCHLECHT-2">Divers</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="mc-field-group">
+                  <input type="text" value="" name="FNAME" id="mce-FNAME" class="form__input form__input--margin" placeholder="Vorname*">
+                </div>
+                <div class="mc-field-group">
+                  <input type="text" value="" name="LNAME" id="mce-LNAME" class="form__input form__input--margin" placeholder="Nachname*">
+                </div>
+                <div id="mce-responses" class="clear">
+                  <div class="response" id="mce-error-response" style="display:none"></div>
+                  <div class="response" id="mce-success-response" style="display:none"></div>
+                </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3f11294127ab68914f83b8679_cd1293c6ad" tabindex="-1" value=""></div>
+                <div class="clear">
+                  <button type="submit" value="Jetzt anmelden" name="subscribe" id="mc-embedded-subscribe" class="button button--outline form__input--margin">Jetzt anmelden</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+          <script type='text/javascript'>
+            (function($) {
+              window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[6]='GESCHLECHT';ftypes[6]='radio'; 
+              $.extend($.validator.messages, {
+                required: "Dieses Feld ist ein Pflichtfeld.",
+                maxlength: $.validator.format("Geben Sie bitte maximal {0} Zeichen ein."),
+                minlength: $.validator.format("Geben Sie bitte mindestens {0} Zeichen ein."),
+                rangelength: $.validator.format("Geben Sie bitte mindestens {0} und maximal {1} Zeichen ein."),
+                email: "Geben Sie bitte eine gültige E-Mail Adresse ein.",
+                url: "Geben Sie bitte eine gültige URL ein.",
+                date: "Bitte geben Sie ein gültiges Datum ein.",
+                number: "Geben Sie bitte eine Nummer ein.",
+                digits: "Geben Sie bitte nur Ziffern ein.",
+                equalTo: "Bitte denselben Wert wiederholen.",
+                range: $.validator.format("Geben Sie bitten einen Wert zwischen {0} und {1}."),
+                max: $.validator.format("Geben Sie bitte einen Wert kleiner oder gleich {0} ein."),
+                min: $.validator.format("Geben Sie bitte einen Wert größer oder gleich {0} ein."),
+                creditcard: "Geben Sie bitte ein gültige Kreditkarten-Nummer ein."
+              });
+            }(jQuery));
+            var $mcj = jQuery.noConflict(true);
+          </script>
+          <!--End mc_embed_signup-->
+          {% comment %}
+          {%- assign formId = 'Contact_Footer' -%}
+          {% form 'customer', id: formId, novalidate: 'novalidate', class: 'wpcf7' %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            {%- if form.posted_successfully? -%}
+              <p class="form-message form-message--success" tabindex="-1" data-form-status>
+                {{ 'general.newsletter_form.confirmation' | t }}
+              </p>
+          	  <script>pintrk('track', 'lead', {lead_type: 'Newsletter'});</script>
+            {%- endif -%}
+            <input type="email" name="contact[email]" class="form__input form__input--email" placeholder="E-Mail Adresse eingeben" required>
+
+            <div class="contact-form__radio">
+              <span class="contact-form__radio__label">Geschlecht: </span>
+              <div class="contact-form__radio__inner">
+                <input type="radio" id="frau" name="contact[Geschlecht]" value="Frau" checked="checked">
+                <label for="frau">Frau</label>
+                <input type="radio" id="herr" name="contact[Geschlecht]" value="Herr">
+                <label for="herr">Herr</label>
+                <input type="radio" id="drivers" name="contact[Geschlecht]" value="Divers">
+                <label for="drivers">Divers</label>
+              </div>
+            </div>
+
+            <input type="text" name="contact[Vorname]" value="" class="form__input form__input--margin" placeholder="Vorname*" required>
+            <input type="text" name="contact[Nachname]" value="" class="form__input form__input--margin" placeholder="Nachname*" required>
+
+            <button type="submit" value="Jetzt anmelden" class="button button--outline form__input--margin">Jetzt anmelden</button>
+          {% endform %}
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__section--bottom">
+    <div class="footer__wrapper">
+      <div class="footer__section footer__section--main">
+        <div class="footer__item">
+          <div class="footer__menus">
+            <div>
+              <p class="h5">{{ mod_product_title }}</p>
+              <div class="menu-menu-footer-products-container">
+                <ul id="menu-menu-footer-products" class="menu">
+                  {%- for link in mod_product_links -%}
+                    <li><a class="nav-link" href="{{ link.url }}">{{ link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+            <div>
+              <p class="h5">{{ mod_about_title }}</p>
+              <div class="menu-menu-footer-about-container">
+                <ul id="menu-menu-footer-about" class="menu">
+                  {%- for link in mod_about_links -%}
+                    <li><a class="nav-link" href="{{ link.url }}">{{ link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+            <div>
+              <p class="h5">{{ mod_support_title }}</p>
+              <div class="menu-menu-footer-support-container">
+                <ul id="menu-menu-footer-support" class="menu">
+                  {%- for link in mod_support_links -%}
+                    <li><a class="nav-link" href="{{ link.url }}">{{ link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__item">
+          <div class="footer__menus">
+            <div>
+              <p class="h5">Zahlungsarten</p>
+              <ul class="payment-icons">
+                {%- assign payment_types = shop.enabled_payment_types | size -%}
+                {%- if payment_types > 0  -%}
+                  {%- for type in shop.enabled_payment_types -%}
+                    <li class="payment-icon">
+                      {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  <li class="payment-icon">
+                    {{ 'visa' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                  </li>
+                  <li class="payment-icon">
+                    {{ 'master' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                  </li>
+                  <li class="payment-icon">
+                    {{ 'american_express' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                  </li>
+                  <li class="payment-icon">
+                    {{ 'paypal' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                  </li>
+                  <li class="payment-icon">
+                    {{ 'diners_club' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                  </li>
+                {%- endif -%}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__social">
+        <p class="h5">Wir sind sozial</p>
+        {%- if settings.social_facebook != blank -%}
+        <span>
+          <a href="{{ settings.social_facebook }}" target="_blank">
+            <img src="{{ 'facebook_logo_white.svg' | asset_url }}" class="image" alt="Seven Sundays on Facebook">
+          </a>
+        </span>
+        {%- endif -%}
+        {%- if settings.social_instagram != blank -%}
+        <span>
+          <a href="{{ settings.social_instagram }}" target="_blank">
+            <img src="{{ 'instragram_logo_white.svg' | asset_url }}" class="image" alt="Seven Sundays on Instagram">
+          </a>
+        </span>
+        {%- endif -%}
+        {%- if settings.social_linkedin != blank -%}
+        <span>
+          <a href="{{ settings.social_linkedin }}" target="_blank">
+            <img src="{{ 'linkedin_logo_white.svg' | asset_url }}" class="image" alt="Seven Sundays on Linkedin">
+          </a>
+        </span>
+        {%- endif -%}
+        {%- if settings.social_xing != blank -%}
+        <span>
+          <a href="{{ settings.social_xing }}" target="_blank">
+            <img src="{{ 'xing_logo_white.svg' | asset_url }}" class="image" alt="Seven Sundays on Xing">
+          </a>
+        </span>
+        {%- endif -%}
+      </div>
+      <div class="metamenu">
+        <span class="metamenu__copyright">© SEVEN SUNDAYS Group AG 2020. All rights reserved.</span>
+        <ul id="menu-meta-menu" class="metamenu__list">
+          <li class="metamenu__item">
+            <a class="nav-link" href="/pages/impressum">Impressum</a>
+          </li>
+          <li class="metamenu__item">
+            <a class="nav-link" href="/pages/agb">AGB</a>
+          </li>
+          <li class="metamenu__item">
+            <a class="nav-link" href="/pages/datenschutz">Datenschutz</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.onload = function (event) {
+    window.nested = new HandyCollapse({
+      nameSpace: "nested",
+      closeOthers: false,
+      activeClass: "active",
+      isAimation: true,
+      animatinSpeed: 200,
+      cssEasing: "ease-in-out"
+    });
+  };
+</script>
+
+<button id="scrollTop"></button>
+
+{%- assign mod_product_links = nil -%}
+{%- assign mod_product_title = nil -%}
+{%- assign mod_about_links = nil -%}
+{%- assign mod_about_title = nil -%}
+{%- assign mod_support_links = nil -%}
+{%- assign mod_support_title = nil -%}

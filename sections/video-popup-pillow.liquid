@@ -1,0 +1,46 @@
+<div class="section__wrapper">
+  <div class="video">
+    <div class="video__play">
+      <div class="video__button js-video-trigger" data-video="{{ section.settings.video }}">
+        {%- include 'icon-play' -%}
+      </div>
+    </div>
+    <img class="lazyload img--desktop" data-src="{{ section.settings.image_desktop | img_url: 'master' }}">
+    <img class="lazyload img--mobile" data-src="{{ section.settings.image_mobile | img_url: 'master' }}">
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Video Popup",
+	"class": "section",
+    "settings": [
+	  {
+		"type": "text",
+		"id": "title",
+		"label": "Title"
+	  },
+	  {
+		"type": "image_picker",
+		"id": "image_desktop",
+		"label": "Image - Desktop"
+	  },
+	  {
+		"type": "image_picker",
+		"id": "image_mobile",
+		"label": "Image - Mobile"
+	  },
+	  {
+		"type": "text",
+		"id": "video",
+		"label": "Video URL"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

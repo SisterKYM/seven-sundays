@@ -1,0 +1,84 @@
+<div class="section__wrapper {% if section.settings.anchor != blank %} section-check{% endif %}" name="{% if section.settings.anchor != blank %}{{ section.settings.anchor }}{% endif %}" id="{% if section.settings.anchor != blank %}{{ section.settings.anchor_id }}{% endif %}">
+  <header class="section__header">
+    <h2 class="h2">{{ section.settings.title }}</h2>
+  </header>
+  <div class="section__body">
+    {%- if section.settings.text1 != blank -%}
+      <div class="h3">{{ section.settings.text1 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text2 != blank -%}
+      <div>{{ section.settings.text2 }}</div>
+    {%- endif -%}
+
+    <div class="slider-content-one">
+      {%- for block in section.blocks -%}
+        <div class="slideBasic">
+          <h3 class="h3">{{ block.settings.title }}</h3>
+          <p>{{ block.settings.content }}</p>
+          <p class="slideBasic__author">{{ block.settings.author }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Rich text",
+  "class": "index-section rich-text-section section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "richtext",
+      "id": "text1",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text2",
+      "label": "Text 2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

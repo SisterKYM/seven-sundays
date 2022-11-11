@@ -1,0 +1,174 @@
+{%- assign mod_main_links = linklists[settings.main_menu].links | default: false -%}
+{%- assign mod_mob_links = linklists[settings.mobile_menu].links | default: false -%}
+{%- assign mod_sticky_links = linklists[settings.sticky_menu].links | default: false -%}
+
+{%- section "sliding-announcements"-%}
+
+<div class="mobile-nav">
+  <div class="mobile-nav__accordion accordion">
+    {%- for link in mod_mob_links -%}
+      {%- if link.links != blank -%}
+        <div class="mobile-nav__item accordion__item {% if forloop.index <= 4 %}mobile-nav__item--invert{% endif %}">
+          <a class="mobile-nav__item__link__over" href="{{ link.url }}"></a>
+          <button class="mobile-nav__item__link accordion__toggle" aria-expanded="false" data-accordion="" data-nested-control="{{ link.title }}">
+            <span class="h3">{{ link.title }}</span>
+            <span class="accordion__toggle__icon--mob">
+              <span class="chevron">{%- render 'icon-chevron' -%}</span>
+            </span>
+          </button>
+          <div class="accordion__content" data-nested-content="{{ link.title }}" style="max-height: 0px; overflow: hidden;">
+            <div>
+              {%- for sub_link in link.links -%}
+                {%- assign product_handle = sub_link.url | replace: '/products/', '' -%}
+                {%- assign product = all_products[product_handle] -%}
+                <a href="{{ sub_link.url }}" class="mobile-nav__subitem">
+                  <div class="mobile-nav__subitem__inner">
+                    <img class="lazyload" data-src="{{ product.featured_image | img_url: '200x' }}">
+                    <div class="mobile-nav__subitem__info">
+                      <div class="mobile-nav__subitem__title">{{ product.title }}</div>
+                      <div class="mobile-nav__subitem__content">{{ product.metafields.global.subtitle }}</div>
+                    </div>
+                  </div>
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      {%- else -%}
+        <div class="mobile-nav__item mobile-nav__item--invert">
+          <a class="mobile-nav__item__link" href="{{ link.url }}">{{ link.title }}</a>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+  <div class="mobile-nav__social">
+    {%- if settings.social_facebook != blank -%}
+    <a href="{{ settings.social_facebook }}" target="_blank">
+      <img data-src="{{ 'icon-facebook.svg' | asset_url }}" class="lazyload" alt="Seven Sundays on Facebook">
+    </a>
+    {%- endif -%}
+    {%- if settings.social_instagram != blank -%}
+    <a href="{{ settings.social_instagram }}" target="_blank">
+      <img data-src="{{ 'icon-instagram.svg' | asset_url }}" class="lazyload" alt="Seven Sundays on Instagram">
+    </a>
+    {%- endif -%}
+    {%- if settings.social_linkedin != blank -%}
+    <a href="{{ settings.social_linkedin }}" target="_blank">
+      <img data-src="{{ 'icon-linkedin.svg' | asset_url }}" class="lazyload" alt="Seven Sundays on Linkedin">
+    </a>
+    {%- endif -%}
+    {%- if settings.social_xing != blank -%}
+    <a href="{{ settings.social_xing }}" target="_blank">
+      <img data-src="{{ 'icon-xing.svg' | asset_url }}" class="lazyload" alt="Seven Sundays on Xing">
+    </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% comment %}
+{%- unless template contains 'blog' or template contains 'article' -%}
+<div class="mobile-sticky">
+  <div class="mobile-sticky__inner">
+    <a class="mobile-sticky__item mobile-sticky__item--chevron">
+    </a>
+    {%- for link in mod_sticky_links -%}
+      <a href="{{ link.url }}" class="mobile-sticky__item {% if canonical_url contains link.url %}active{% endif %}">
+        <span>{{ link.title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+{%- endunless -%}
+{% endcomment %}
+
+<header class="header">
+  <div class="header__top">
+    <div class="header__logo">
+      <div class="header__logo__inner">
+        <a href="/" title="SEVEN SUNDAYS">SEVEN SUNDAYS{%- include 'icon-logo' -%}</a>
+      </div>
+      <div class="header__icons">
+        <a class="account-icon" href="/account/">
+          {%- include 'icon-account' -%}
+          <span class="account-icon__label">Mein Konto</span>
+        </a>
+        <a class="cart-icon js-cart-trigger" href="javascript:void(0);">
+          {%- include 'icon-cart' -%}
+          <span class="account-icon__label">Warenkorb</span>
+          <span class="cart-count {% if cart.item_count > 0 %}cart-count--active{% endif %}">{{ cart.item_count }}</span>
+        </a>
+        <span class="header__hamburger">{%- include 'icon-hamburger' -%}{%- include 'icon-close' -%}</span>
+      </div>
+    </div>
+    <div class="mainMenu">
+      <nav menu-scroll>
+        <button type="button" menu-scroll-button data-action="scroll-left">Scroll left</button>
+        <ul class="menu">
+          {%- for link in mod_main_links -%}
+            <li class="menu__item">
+              <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+              {%- if link.links != blank -%}
+                <ul class="menu__subitems">
+                  {%- for sub_link in link.links -%}
+                    {%- assign product_handle = sub_link.url | split: '/' | last -%}
+                    {%- assign product = all_products[product_handle] -%}
+                    <li class="menu__subitem">
+                      <a href="{{ sub_link.url }}" class="menu__subitem__link">
+                        <div class="menu__subitem__inner">
+                          {%- if sub_link.url contains 'products' -%}
+                            <img src="{{ product.featured_image | img_url: '200x' }}">
+                            <div class="menu__subitem__info">
+                              <div class="menu__subitem__title">{{ product.title }}</div>
+                            </div>
+                          {%- else -%}
+                            <div class="menu__subitem__text">
+                              {{ sub_link.title }}
+                            </div>
+                          {%- endif -%}
+                        </div>
+                      </a>
+                      {%- comment -%}
+                      {%- if sub_link.links != blank -%}
+                        <ul class="menu__childitems">
+                          {%- for child_link in sub_link.links -%}
+                            <li class="menu__childitem">
+                              <a href="{{ child_link.url }}" class="menu__childitem__link">
+                                <div class="menu__childitem__inner">
+                                  <div class="menu__childitem__text">
+                                    {{ child_link.title }}
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                      {%- endcomment %}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+        <button type="button" menu-scroll-button data-action="scroll-right">Scroll right</button>
+      </nav>
+    </div>
+  </div>
+  {%- if template != 'index' -%}
+    <div class="header__bottom">
+      <div class="submenu">
+        <nav menu-scroll>
+          <button type="button" menu-scroll-button data-action="scroll-left">Scroll left</button>
+          <ul class="submenu__list">
+          </ul>
+          <button type="button" menu-scroll-button data-action="scroll-right">Scroll right</button>
+        </nav>
+      </div>
+    </div>
+  {%- endif -%}
+</header>
+
+{%- assign mod_main_links = nil -%}
+{%- assign mod_mob_links = nil -%}
+{%- assign mod_sticky_links = nil -%}

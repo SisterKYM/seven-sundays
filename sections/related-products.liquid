@@ -1,0 +1,53 @@
+<div class="section__wrapper">
+  <div class="related-products">
+    <div class="related-products__header">
+      <h2 class="h2">{{ section.settings.title }}</h2>
+    </div>
+    <div class="related-products__wrapper">
+      {%- assign collection = collections[section.settings.collection] -%}
+      {%- for mod_product in collection.products -%}
+        {%- assign tagName = '' -%}
+        {%- if mod_product.tags contains 'Preiswert' -%}
+          {%- assign tagName = 'Preiswert' -%}
+        {%- elsif mod_product.tags contains 'Vorteilhaft' -%}
+          {%- assign tagName = 'Vorteilhaft' -%}
+        {%- elsif mod_product.tags contains 'Beliebt' -%}
+          {%- assign tagName = 'Beliebt' -%}
+        {%- endif -%}
+        <div class="related-product">
+          <span class="related-product__label">{{ tagName }}</span>
+          <img class="related-product__image lazyload" data-src="{{ mod_product.featured_image | img_url: '500x' }}">
+          <h2 class="related-product__title h3">{{ mod_product.title }}</h2>
+          <h6 class="related-product__subtitle h6">{{ mod_product.metafields.global.meta_title }}</h6>
+          <p class="related-product__content text-small">{{ mod_product.metafields.global.meta_content }}</p>
+          <div class="related-product__price">{{ mod_product.price | money }}</div>
+          {% if mod_product.handle == product.handle %}
+            <a class="related-product__link button button--accent" href="#shopify-section-product-template">Jetzt bestellen</a>
+          {% else %}
+            <a class="related-product__link button button--accent" href="{{ mod_product.url }}">Hier entdecken</a>
+          {% endif %}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Related Products",
+  "class": "related-products-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Related products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ]
+}
+{% endschema %}

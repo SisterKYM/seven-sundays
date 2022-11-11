@@ -1,0 +1,35 @@
+{% comment %}
+  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+{%- if collection.handle == 'all' -%}
+  {%- layout none -%}
+  <script>window.location.href = '/';</script>
+{%- else -%}
+  {%- render 'collection-header' -%}
+  {%- section 'benefits' -%}
+  {%- section 'rich-text' -%}
+  {%- section 'feature-images' -%}
+  {%- section 'rich-text-accordions' -%}
+  {%- section 'rich-text-product-accordions' -%}
+  {%- section 'cta' -%}
+  {%- section 'rich-text-video' -%}
+  {%- section 'rich-text-copy1' -%}
+  {%- section 'feature-images-copy1' -%}
+  {%- section 'rich-text-checklist' -%}
+  {%- section 'rich-text-checklist-1' -%}
+  {%- section 'rich-text-copy2' -%}
+  {%- section 'feature-images-copy2' -%}
+  {%- section 'rich-text-copy3' -%}
+  {%- section 'rich-text-blocks' -%}
+  {%- section 'newsletter' -%}
+  {%- section 'rich-text-copy4' -%}
+  {%- section 'rich-text-tabs' -%}
+  {%- section 'rich-text-slider' -%}
+  {%- section 'feature-images-copy3' -%}
+  {%- section 'rich-text-copy5' -%}
+  {%- section 'rich-text-copy6' -%}
+  {%- section 'cta-copy1' -%}
+  {%- section 'rich-text-slider-copy1' -%}
+  {%- section 'rich-text-icons' -%}
+  {%- section 'feature-row-copy1' -%}
+{%- endif -%}

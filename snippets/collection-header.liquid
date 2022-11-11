@@ -1,0 +1,10 @@
+<div class="collection-header section-check" name="Produkte" id="produkte">
+  <div class="page-container">
+    <h1 class="h1">{{ collection.title }}</h1>
+    <div class="product-grid">
+      {%- for product in collection.products -%}
+        {%- render 'product-item', mod_product: product -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

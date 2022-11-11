@@ -1,0 +1,51 @@
+<div class="page-container">
+  <div class="customer-register">
+
+      <div class="form-vertical">
+
+        <h4 class="h4">{{ 'customer.register.title' | t }}</h4>
+
+        {%- assign formId = 'RegisterForm' -%}
+        {% form 'create_customer', id: formId, novalidate: 'novalidate' %}
+          {% include 'form-status', form: form, form_id: formId %}
+
+          <input class="form__input" placeholder="{{ 'customer.register.first_name' | t }}" type="text" name="customer[first_name]" id="{{ formId }}-FirstName" {% if form.first_name %}value="{{ form.first_name }}"{% endif %} autocomplete="given-name">
+          <input class="form__input" placeholder="{{ 'customer.register.last_name' | t }}" type="text" name="customer[last_name]" id="{{ formId }}-LastName" {% if form.last_name %}value="{{ form.last_name }}"{% endif %} autocomplete="family-name">
+          <input
+            type="email"
+            name="customer[email]"
+            id="{{ formId }}-email"
+            class="form__input {% if form.errors contains 'email' %} input--error{% endif %}"
+            {% if form.email %} value="{{ form.email }}"{% endif %}
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            aria-required="true"
+            placeholder="{{ 'customer.register.email' | t }}"
+            {%- if form.errors contains 'email' -%}
+              class="input--error"
+              aria-invalid="true"
+              aria-describedby="{{ formId }}-email-error"
+            {%- endif -%}
+          >
+
+          <input
+            type="password"
+            name="customer[password]"
+            id="{{ formId }}-password"
+            class="form__input {% if form.errors contains 'password' %} input--error{% endif %}"
+            aria-required="true"
+            placeholder="{{ 'customer.register.password' | t }}"
+            {%- if form.errors contains 'password' -%}
+              class="input--error"
+              aria-invalid="true"
+              aria-describedby="{{ formId }}-password-error"
+            {%- endif -%}
+          >
+
+          <input type="submit" value="{{ 'customer.register.submit' | t }}" class="button button--accent">
+
+        {% endform %}
+      </div>
+  </div>
+</div>

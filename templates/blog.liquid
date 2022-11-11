@@ -1,0 +1,71 @@
+{% comment %}
+  The contents of the blog.liquid template can be found in /sections/blog-template.liquid
+{% endcomment %}
+{% comment %}
+{% section 'blog-template' %}
+{% endcomment %}
+<div class="nightBackground"></div>
+<div class="page-container">
+  <div class="gutenachtHeader-wrapper">
+    <header class="gutenachtHeader">
+      <span class="icon-moon"></span>
+      <h1 class="h1">Gute Nacht</h1>
+      <span class="icon-star"></span>
+      <span class="icon-star-small"></span>
+    </header>
+  </div>
+  <div class="category">
+    <div class="category__header">
+      {%- for article in blog.articles -%}
+        <a href="{{ article.url }}" title="{{ article.title }}">
+          <article>
+            <div>
+              <img class="lazyload" data-src="{{ article.image | img_url: '600x' }}" />
+            </div>
+            <div>
+              <h2 class="h2">{{ article.title }}</h2>
+              <p>
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                {% else %}
+                  {{ article.content | strip_html | truncate: 150 }}
+                {% endif %}
+              </p>
+              <div class="button button--ghost button--invert"><span>Weiter lesen</span></div>
+            </div>
+          </article>
+        </a>
+        {%- break -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="category__body">
+      <ul class="grid">
+        {%- for article in blog.articles -%}
+          {%- if forloop.index > 1 -%}
+            <li class="grid__item">
+              <a class="grid__link" href="{{ article.url }}" title="{{ article.title }}">
+                <article>
+                  <div class="grid__media">
+                    <img class="lazyload" data-src="{{ article.image | img_url: '300x' }}" />
+                  </div>
+                  <div class="grid__copy">
+                    <h3 class="h4">{{ article.title }}</h3>
+                    <p>
+                      {% if article.excerpt.size > 0 %}
+                        {{ article.excerpt }}
+                      {% else %}
+                        {{ article.content | strip_html | truncate: 150 }}
+                      {% endif %}
+                    </p>
+                    <div class="button button--ghost"><span>Weiter lesen</span></div>
+                  </div>
+                </article>
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="section__wrapper">
+  <div class="section__blocks">
+    {%- for block in section.blocks -%}
+      <div class="section__block">
+        <img class="section__block__image lazyload" data-src="{{ block.settings.image | img_url: '500x' }}">
+        <div class="section__block__text">
+          <div class="h3">{{ block.settings.title }}</div>
+          <div class="section__block__content">{{ block.settings.content }}</div>
+          {%- if block.settings.button != blank -%}
+            <a href="{{ block.settings.url }}" class="button button--accent">{{ block.settings.button }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Rich text with blocks",
+  "class": "rich-text-blocks-section section",
+  "settings": [
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Button URL"
+        },
+        {
+          "type": "text",
+          "id": "button",
+          "label": "Button Label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

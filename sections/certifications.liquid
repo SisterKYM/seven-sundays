@@ -1,0 +1,55 @@
+<div class="page-container">
+  <div class="certifications-wrapper" style="background-color: {{ section.settings.bk_color }}">
+    <h2 class="h2" style="color: {{ section.settings.text_color }}">{{ section.settings.title }}</h2>
+    <div class="certifications">
+      {%- for block in section.blocks -%}
+        <div class="certification">
+          <img class="lazyload" data-src="{{ block.settings.image | img_url: '300x' }}">
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Certifications",
+  "class": "index-section certifications-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "bk_color",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certifications",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

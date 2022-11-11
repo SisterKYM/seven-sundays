@@ -1,0 +1,75 @@
+<div class="section__wrapper">
+  <header class="section__header">
+    <h2 class="h2">{{ section.settings.section_title }}</h2>
+  </header>
+  <div class="section__body">
+    {%- if section.settings.video != blank -%}
+    <div class="video">
+      <div class="video__play">
+        <div class="video__button">
+          {%- include 'icon-play' -%}
+        </div>
+      </div>
+      <video src="{{ section.settings.video }}" title="Seven Sundays Matratze Produktvideo"></video>
+    </div>
+    {%- endif -%}
+    <p class="h3">{{ section.settings.text1 }}</p>
+    <p class="">{{ section.settings.text2 }}</p>
+    {%- if section.settings.image != blank -%}
+      <img class="section__media lazyload" data-src="{{ section.settings.image | img_url: '800x' }}">
+    {%- endif -%}
+    
+    {%- if section.settings.text3 != blank -%}
+      <div class="h3">{{ section.settings.text3 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text4 != blank -%}
+      <div>{{ section.settings.text4 }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Rich text with video",
+  "class": "rich-text-video-section section section--divider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "textarea",
+      "id": "text1",
+      "label": "Text 1"
+    },
+    {
+      "type": "textarea",
+      "id": "text2",
+      "label": "Text 2"
+    },
+    {
+      "type": "richtext",
+      "id": "text3",
+      "label": "Text 3"
+    },
+    {
+      "type": "richtext",
+      "id": "text4",
+      "label": "Text 4"
+    },
+    {
+      "type": "text",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,149 @@
+{%- if  section.blocks.size > 0 and section.settings.show_announcement_bar -%}
+
+<style>
+
+  .swiper-wrapper {
+    align-items: center;
+  }
+
+  #announcement-wrapper--{{ section.id }} {
+    background: {{ section.settings.colorBackground }};
+  }
+
+  .sliding-announcement-bar--{{ section.id }} {
+    position: relative;
+    max-width: 600px;
+    overflow: hidden;
+    margin: 0px auto;
+  }
+  .sliding-announcement-bar--{{ section.id }} .sliding-message,
+  .sliding-message.swiper-slide a {
+    text-align: center;
+    color: {{ section.settings.colorText }};
+    padding: 0 7%;
+    font-size: 16px;
+  }
+  @media screen and (max-width: 767px) {
+    .sliding-announcement-bar--{{ section.id }} .sliding-message,
+    .sliding-message.swiper-slide a {
+      font-size: 14px;
+      line-height: 24px;
+    }
+  }
+  .sliding-announcement-bar--{{ section.id }} .swiper-button-next:after, .sliding-announcement-bar--{{ section.id }} .swiper-container-rtl .swiper-button-prev:after,
+  .sliding-announcement-bar--{{ section.id }} .swiper-button-prev:after, .sliding-announcement-bar--{{ section.id }} .swiper-container-rtl .swiper-button-next:after {
+    font-size: 15px;
+    color: {{ section.settings.colorText }};
+  }
+  {%- if  section.blocks.size < 2 %}
+  .sliding-announcement-bar--{{ section.id }} .sliding-swiper-button {
+      display: none!important;
+    }
+  {%- endif -%}
+  .swiss-flag {
+    background: url("https://cdn.shopify.com/s/files/1/0322/4194/2587/files/flag_swiss.png") no-repeat center center;
+    width: 20px;
+    height: 15px;
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+  }
+
+</style>
+
+<div id="announcement-wrapper--{{ section.id }}">
+  <div class="sliding-announcement-bar--{{ section.id }} swiper-container">
+
+    <div class="sliding-messages swiper-wrapper">
+      {%- for block in section.blocks -%}
+  
+      {%- if block.type == 'header' -%}
+  
+      <div class="sliding-message swiper-slide">
+        <a href="{{ block.settings.link }}"> {{ block.settings.message }} </a>
+      </div>
+  
+      {%- endif -%}
+  
+      {%- endfor -%}
+    </div>
+  
+    <div class="sliding-swiper-button swiper-button-prev"></div>
+    <div class="sliding-swiper-button swiper-button-next"></div>
+  
+  </div>
+</div>
+
+<script>
+
+ const swiper = new Swiper('.swiper-container', {
+
+    {%- if section.settings.autoplay -%}
+      autoplay: { delay: {{ section.settings.delay | json }} },
+    {%- endif -%}
+
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    }
+  });
+
+</script>
+
+
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_announcement_bar",
+        "label": "Show"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay"
+      },
+      {
+        "type": "text",
+        "id": "delay",
+        "label": "Delay between transitions (in ms)",
+        "default": "5000"
+      },
+      {
+        "type": "color",
+        "id": "colorBackground",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "colorText",
+        "label": "Text color",
+        "default": "#000"
+      }
+],
+"blocks": [
+      {
+        "type": "header",
+        "name": "Message",
+        "settings": [
+            {
+              "id": "message",
+              "type": "textarea",
+             "label": "Announcement"
+            },
+            {
+                "id": "link",
+                "type": "url",
+                "label": "Announcement's link"
+            }
+        ]
+      }
+]
+  }
+{% endschema %}

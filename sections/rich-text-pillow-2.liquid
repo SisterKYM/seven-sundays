@@ -1,0 +1,122 @@
+<div class="section__wrapper {% if section.settings.anchor != blank %} section-check{% endif %}" name="{% if section.settings.anchor != blank %}{{ section.settings.anchor }}{% endif %}" id="{% if section.settings.anchor != blank %}{{ section.settings.anchor_id }}{% endif %}">
+  {% if section.settings.section_title != blank %}
+  <header class="section__header">
+    <h2 class="h2">{{ section.settings.section_title }}</h2>
+  </header>
+  {% endif %}
+  <div class="section__body">
+    {%- if section.settings.text1 != blank -%}
+      <div class="h3">{{ section.settings.text1 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text2 != blank -%}
+      <div>{{ section.settings.text2 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text3 != blank -%}
+      <div class="h3">{{ section.settings.text3 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text4 != blank -%}
+      <div>{{ section.settings.text4 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text5 != blank -%}
+      <div class="h3">{{ section.settings.text5 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text6 != blank -%}
+      <div>{{ section.settings.text6 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text7 != blank -%}
+      <div class="h3">{{ section.settings.text7 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.text8 != blank -%}
+      <div>{{ section.settings.text8 }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.btn_label != blank -%}
+    <a href="{{ section.settings.btn_url }}" class="button button--red">{{ section.settings.btn_label }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Rich text",
+  "class": "index-section rich-text-section section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "richtext",
+      "id": "text1",
+      "label": "Text 1",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text2",
+      "label": "Text 2"
+    },
+    {
+      "type": "richtext",
+      "id": "text3",
+      "label": "Text 3"
+    },
+    {
+      "type": "richtext",
+      "id": "text4",
+      "label": "Text 4"
+    },
+    {
+      "type": "richtext",
+      "id": "text5",
+      "label": "Text 5",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text6",
+      "label": "Text 6"
+    },
+    {
+      "type": "richtext",
+      "id": "text7",
+      "label": "Text 7"
+    },
+    {
+      "type": "richtext",
+      "id": "text8",
+      "label": "Text 8"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label"
+    }
+  ]
+}
+{% endschema %}

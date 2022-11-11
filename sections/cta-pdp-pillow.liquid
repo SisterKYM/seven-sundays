@@ -1,0 +1,35 @@
+<div class="cta__wrapper">
+  <p class="h4">{{ section.settings.section_title }}</p>
+  <h2 class="cta__headline">{{ section.settings.content }}</h2>
+  <a href="{{ section.settings.url }}" class="button button--accent">{{ section.settings.btn }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "CTA",
+  "class": "cta-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "text",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    },
+    {
+      "type": "text",
+      "id": "btn",
+      "label": "Button"
+    }
+  ]
+}
+{% endschema %}
